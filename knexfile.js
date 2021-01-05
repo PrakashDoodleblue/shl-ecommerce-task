@@ -24,6 +24,9 @@ module.exports = {
         migrations: {
             directory: MigrationDir,
         },
+    },
+    defaultSchema: {
+        BaseModel: `${process.env.DB_NAME}`
     }
 
 };
