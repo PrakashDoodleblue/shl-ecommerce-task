@@ -5,8 +5,6 @@ exports.up = function(knex) {
         table.integer('productCategoryId').unsigned().notNullable().references('categoryId').inTable('SHLC01_CATEGORY').onDelete('CASCADE').index();
         table.integer('prodcutItemListId').unsigned().notNullable().references('itemId').inTable('SHLC02_ITEMLIST').onDelete('CASCADE').index();
         table.integer('productpriceId').unsigned().notNullable().references('priceId').inTable('SHLC03_PRODUCTPRICE').onDelete('CASCADE').index();
-        table.string('itemName');
-        table.string('itemImage');
         table.boolean('status').defaultTo(true);
         table.timestamps(true, true);
         table.unique(['itemcode']);

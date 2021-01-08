@@ -29,6 +29,7 @@
         "pino": "^6.9.0"
     },
     "devDependencies": {
-        "nodemon": "^2.0.4"
+        "nodemon": "^2.0.4",
+        "supertest": "^6.0.1"
     }
 }

@@ -1,6 +1,3 @@
-const { isSchema } = require('joi');
-const BaseModel = require('../../../knexfile');
-const schema = BaseModel.defaultSchema.BaseModel;
 const productcategoryModel = require('../Category/Category');
 const itemListModel = require('../Itemlist/ItemList');
 class Price extends Model {

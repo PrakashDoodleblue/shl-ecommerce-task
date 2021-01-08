@@ -1,3 +1,16 @@
+<?php 
+
+$imageBaseurl ='http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //TODO will configure
+$url = 'http://localhost:2082/v1/price/list';
+$ch_new = curl_init();
+curl_setopt($ch_new, CURLOPT_URL, $url);
+curl_setopt($ch_new, CURLOPT_RETURNTRANSFER, 1);                        
+curl_setopt($ch_new, CURLOPT_SSL_VERIFYPEER, 0);
+curl_setopt($ch_new, CURLOPT_SSL_VERIFYHOST, 0);            
+$CurlResponse = curl_exec($ch_new);
+$Responsedata = json_decode($CurlResponse, true); 
+curl_close($ch_new);            
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +93,7 @@
         <div class="jumbotron color-grey-light mt-70">
             <div class="d-flex align-items-center h-100">
                 <div class="container text-center py-5">
-                    <h3 class="mb-0">Shopping cart</h3>
+                    <h3 class="mb-0">Item List</h3>
                 </div>
             </div>
         </div>
@@ -97,88 +110,86 @@
 
                 <!--Grid row-->
                 <div class="row">
+                <div class="col-lg-8">
 
-                    <!--Grid column-->
-                    <div class="col-lg-8">
+        <!-- Card -->
+        <div class="mb-3">
+        <div class="pt-4 wish-list">
 
-                        <!-- Card -->
-                        <div class="card wish-list mb-4">
-                            <div class="card-body">
-
-                                <h5 class="mb-4">Cart (<span>2</span> items)</h5>
-
-                                <div class="row mb-4">
-                                    <div class="col-md-5 col-lg-3 col-xl-3">
-                                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                            <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
-                                            <a href="#!">
-                                                <div class="mask waves-effect waves-light">
-                                                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
-                                                    <div class="mask rgba-black-slight waves-effect waves-light"></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-lg-9 col-xl-9">
-                                        <div>
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h5>Blue denim shirt</h5>
-                                                    <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                                                    <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                                                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
-                                                </div>
-                                                <div>
-                                                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                                                        <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-                                                    </div>
-                                                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                            (Note, 1 piece)
-                          </small>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0"><span><strong>$17.99</strong></span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="mb-4">
-
-                            </div>
-                        </div>
-                        <!-- Card -->
-
-                        <!-- Card -->
-                        <div class="card mb-4">
-                            <div class="card-body">
-
-                                <h5 class="mb-4">Expected shipping delivery</h5>
-
-                                <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
-                            </div>
-                        </div>
-                        <!-- Card -->
-
-                        <!-- Card -->
-                        <div class="card mb-4">
-                            <div class="card-body">
-
-                                <h5 class="mb-4">We accept</h5>
-
-                                <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg" alt="Visa">
-                                <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg" alt="American Express">
-                                <img class="mr-2" width="45px" src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg" alt="Mastercard">
-                            </div>
-                        </div>
-                        <!-- Card -->
-
+            <h5 class="mb-4">Product List</h5>
+    <?php foreach($Responsedata['data'] as $key =>$value) { ?>
+            <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']['itemImage']; ?>" alt="Sample">
+                <a href="#!">
+                    <div class="mask">
+                    <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']->itemImage; ?>"">
+                    <div class="mask rgba-black-slight"></div>
                     </div>
-                    <!--Grid column-->
+                </a>
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                    <h5>Blue denim shirt</h5>
+                    <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
+                    <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
+                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                    </div>
+                    <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                        <button id="basic-example-decrease" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="minus"></button>
+                        <input class="quantity" min="0" name="quantity" value="1" type="number">
+                        <button id="basic-example-add" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="plus"></button>
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                        (Note, 1 piece)
+                    </small>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">                  
+                    <p class="mb-0"><span><strong>$17.99</strong></span></p class="mb-0">
+                </div>
+                </div>
+            </div>
+            </div>
+        <?php } ?>
+            <hr class="mb-4">
+        </div>
+        </div>
+        <!-- Card -->
 
-                    <!--Grid column-->
+
+
+<!-- Card -->
+<div class="mb-3">
+  <div class="pt-4">
+
+    <h5 class="mb-4">We accept</h5>
+
+    <img class="mr-2" width="45px"
+      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+      alt="Visa">
+    <img class="mr-2" width="45px"
+      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+      alt="American Express">
+    <img class="mr-2" width="45px"
+      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+      alt="Mastercard">
+    <img class="mr-2" width="45px"
+      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+      alt="PayPal acceptance mark">
+  </div>
+</div>
+<!-- Card -->
+
+</div>
+<!--Grid column-->
                     <div class="col-lg-4">
 
                         <!-- Card -->
@@ -315,6 +326,7 @@
     <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/mdb.min.js"></script>
     <!-- MDB Ecommerce JavaScript -->
     <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/mdb.ecommerce.min.js"></script>
+    <script type="text/javascript" src="./assets/js/cart.js"></script>
     <script>
     </script>
 </body>

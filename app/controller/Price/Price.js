@@ -6,7 +6,7 @@ const constantData = require('../../config/Constants').constants();
 class Price extends baseController {
 
     /**
-     * @DESC : Add Category
+     * @DESC : Add Price
      * @param : string/Int
      * @return : array/object [json]
      */
@@ -22,7 +22,7 @@ class Price extends baseController {
     }
 
     /**
-     * @DESC : Category - List
+     * @DESC : Price - List
      * @param : string/Int
      * @return : array/object [json]
      */
@@ -46,7 +46,7 @@ class Price extends baseController {
     }
 
     /**
-     * @DESC : Upadte Category
+     * @DESC : Upadte Price
      * @param : string/Int
      * @return : array/object [json]
      */
@@ -63,7 +63,7 @@ class Price extends baseController {
     }
 
     /**
-     * @DESC : Delete Category
+     * @DESC : Delete Price
      * @param : string/Int
      * @return : array/object [json]
      */
