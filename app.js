@@ -47,10 +47,10 @@ global.itemImageurl = process.env.IMAGE_URL;
 
 const apiRoutelist = require('./app/routes/ApiRoutelist'); //API Route List
 
-app.use('/v1', apiRoutelist);
+app.use('/api/v1', apiRoutelist);
 app.get('/', (req, res) => res.status(responseCode.HTTP_OK).json({ message: "Server is healthy!." }));
 
 //App Listen Port
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
-module.exports = app;
+module.exports = app

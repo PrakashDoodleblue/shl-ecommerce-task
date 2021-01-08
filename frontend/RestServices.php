@@ -3,7 +3,7 @@ class RestServices {
   public $imageBaseurl;  
 
   function __construct() {        
-    $this->restServiceurl = 'http://localhost:2082/v1/';
+    $this->restServiceurl = 'http://localhost:2082/api/v1/';
   }
 
   /**
