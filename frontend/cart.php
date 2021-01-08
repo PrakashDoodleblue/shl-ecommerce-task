@@ -93,7 +93,7 @@ curl_close($ch_new);
         <div class="jumbotron color-grey-light mt-70">
             <div class="d-flex align-items-center h-100">
                 <div class="container text-center py-5">
-                    <h3 class="mb-0">Item List</h3>
+                    <h3 class="mb-0">Product List</h3>
                 </div>
             </div>
         </div>
@@ -115,8 +115,6 @@ curl_close($ch_new);
         <!-- Card -->
         <div class="mb-3">
         <div class="pt-4 wish-list">
-
-            <h5 class="mb-4">Product List</h5>
     <?php foreach($Responsedata['data'] as $key =>$value) { ?>
             <div class="row mb-4">
             <div class="col-md-5 col-lg-3 col-xl-3">
@@ -124,7 +122,7 @@ curl_close($ch_new);
                 <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']['itemImage']; ?>" alt="Sample">
                 <a href="#!">
                     <div class="mask">
-                    <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']->itemImage; ?>"">
+                    <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']['itemImage']; ?>">
                     <div class="mask rgba-black-slight"></div>
                     </div>
                 </a>
@@ -134,18 +132,13 @@ curl_close($ch_new);
                 <div>
                 <div class="d-flex justify-content-between">
                     <div>
-                    <h5>Blue denim shirt</h5>
-                    <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                    <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                    <h5><?php echo $value['ItemList']['itemName']; ?></h5>                    
                     </div>
                     <div>
                     <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button id="basic-example-decrease" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="minus"></button>
+                        <button class="minus qty-minus-btn" data-price="<?php echo $value['price'];?>" data-categoryid="<?php echo $value['productcategory']['categoryId']?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId']?>"></button>
                         <input class="quantity" min="0" name="quantity" value="1" type="number">
-                        <button id="basic-example-add" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="plus"></button>
+                        <button class="plus qty-add-btn" data-price="<?php echo $value['price'];?>" data-categoryid="<?php echo $value['productcategory']['categoryId']?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId']?>"></button>
                     </div>
                     <small id="passwordHelpBlock" class="form-text text-muted text-center">
                         (Note, 1 piece)
@@ -153,7 +146,7 @@ curl_close($ch_new);
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">                  
-                    <p class="mb-0"><span><strong>$17.99</strong></span></p class="mb-0">
+                    <p class="mb-0"><span><strong>&#8377;<?php echo $value['price']; ?></strong></span></p class="mb-0">
                 </div>
                 </div>
             </div>
@@ -200,21 +193,21 @@ curl_close($ch_new);
 
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                        Temporary amount
-                                        <span>$53.98</span>
+                                        Temporary amount &#8377;
+                                        <span>0.00</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                        Shipping
-                                        <span>Gratis</span>
+                                        Shipping &#8377;
+                                        <span>0.00</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div>
                                             <strong>The total amount of</strong>
                                             <strong>
-                        <p class="mb-0">(including VAT)</p>
+                        <p class="mb-0">(including GST) &#8377;</p>
                       </strong>
                                         </div>
-                                        <span><strong>$53.98</strong></span>
+                                        <span>&#8377;<strong>0.00</strong></span>
                                     </li>
                                 </ul>
 

@@ -19,4 +19,10 @@ router.get('/price/list/:priceid?', priceController.priceList);
 router.put('/price/update', priceController.updatePrice);
 router.delete('/price/delete/:priceid', priceController.deletePrice);
 
+//DESC: Product Item List Routes Defined Here
+// const priceController = require('../controller/Price/Price');
+// router.post('/product/add', priceController.addPrice);
+// router.get('/price/list/:priceid?', priceController.priceList);
+// router.put('/price/update', priceController.updatePrice);
+// router.delete('/price/delete/:priceid', priceController.deletePrice);
 module.exports = router;
