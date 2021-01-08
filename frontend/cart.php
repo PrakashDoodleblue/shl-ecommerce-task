@@ -1,15 +1,8 @@
-<?php 
-
-$imageBaseurl ='http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //TODO will configure
-$url = 'http://localhost:2082/v1/price/list';
-$ch_new = curl_init();
-curl_setopt($ch_new, CURLOPT_URL, $url);
-curl_setopt($ch_new, CURLOPT_RETURNTRANSFER, 1);                        
-curl_setopt($ch_new, CURLOPT_SSL_VERIFYPEER, 0);
-curl_setopt($ch_new, CURLOPT_SSL_VERIFYHOST, 0);            
-$CurlResponse = curl_exec($ch_new);
-$Responsedata = json_decode($CurlResponse, true); 
-curl_close($ch_new);            
+<?php
+require_once('./RestServices.php');
+$restServices = new RestServices();
+$productList = $restServices->getItemList();
+$imageBaseurl = 'http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //TODO will configure
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +42,8 @@ curl_close($ch_new);
 
                 <!-- Collapse button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="basicExampleNav">
@@ -65,22 +58,22 @@ curl_close($ch_new);
                         </li>
                         <li class="nav-item">
                             <a href="#!" class="nav-link waves-effect">
-                Shop
-              </a>
+                                Shop
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="#!" class="nav-link waves-effect">
-                Contact
-              </a>
+                                Contact
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="#!" class="nav-link waves-effect">
-                Sign in
-              </a>
+                                Sign in
+                            </a>
                         </li>
                         <li class="nav-item pl-2 mb-2 mb-md-0">
                             <a href="#!" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign
-                up</a>
+                                up</a>
                         </li>
                     </ul>
 
@@ -110,79 +103,71 @@ curl_close($ch_new);
 
                 <!--Grid row-->
                 <div class="row">
-                <div class="col-lg-8">
+                    <div class="col-lg-8">
 
-        <!-- Card -->
-        <div class="mb-3">
-        <div class="pt-4 wish-list">
-    <?php foreach($Responsedata['data'] as $key =>$value) { ?>
-            <div class="row mb-4">
-            <div class="col-md-5 col-lg-3 col-xl-3">
-                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']['itemImage']; ?>" alt="Sample">
-                <a href="#!">
-                    <div class="mask">
-                    <img class="img-fluid w-100" src="<?php echo $imageBaseurl.$value['ItemList']['itemImage']; ?>">
-                    <div class="mask rgba-black-slight"></div>
+                        <!-- Card -->
+                        <div class="mb-3">
+                            <div class="pt-4 wish-list">
+                                <?php foreach ($productList['data'] as $key => $value) { ?>
+                                    <div class="row mb-4">
+                                        <div class="col-md-5 col-lg-3 col-xl-3">
+                                            <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                                <img class="img-fluid w-100" src="<?php echo $imageBaseurl . $value['ItemList']['itemImage']; ?>" alt="Sample">
+                                                <a href="#!">
+                                                    <div class="mask">
+                                                        <img class="img-fluid w-100" src="<?php echo $imageBaseurl . $value['ItemList']['itemImage']; ?>">
+                                                        <div class="mask rgba-black-slight"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-lg-9 col-xl-9">
+                                            <div>
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <h5><?php echo $value['ItemList']['itemName']; ?></h5>
+                                                    </div>
+                                                    <div>
+                                                        <div class="def-number-input number-input safari_only mb-0 w-100">
+                                                            <button class="minus qty-minus-btn" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productcategory']['categoryId'] ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
+                                                            <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                                            <button class="plus qty-add-btn" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productcategory']['categoryId'] ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
+                                                        </div>
+                                                        <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                                                            (Note, 1 piece)
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <p class="mb-0"><span><strong>&#8377;<?php echo $value['price']; ?></strong></span></p class="mb-0">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <hr class="mb-4">
+                            </div>
+                        </div>
+                        <!-- Card -->
+
+
+
+                        <!-- Card -->
+                        <div class="mb-3">
+                            <div class="pt-4">
+
+                                <h5 class="mb-4">We accept</h5>
+
+                                <img class="mr-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg" alt="Visa">
+                                <img class="mr-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg" alt="American Express">
+                                <img class="mr-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg" alt="Mastercard">
+                                <img class="mr-2" width="45px" src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png" alt="PayPal acceptance mark">
+                            </div>
+                        </div>
+                        <!-- Card -->
+
                     </div>
-                </a>
-                </div>
-            </div>
-            <div class="col-md-7 col-lg-9 col-xl-9">
-                <div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                    <h5><?php echo $value['ItemList']['itemName']; ?></h5>                    
-                    </div>
-                    <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button class="minus qty-minus-btn" data-price="<?php echo $value['price'];?>" data-categoryid="<?php echo $value['productcategory']['categoryId']?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId']?>"></button>
-                        <input class="quantity" min="0" name="quantity" value="1" type="number">
-                        <button class="plus qty-add-btn" data-price="<?php echo $value['price'];?>" data-categoryid="<?php echo $value['productcategory']['categoryId']?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId']?>"></button>
-                    </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                        (Note, 1 piece)
-                    </small>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">                  
-                    <p class="mb-0"><span><strong>&#8377;<?php echo $value['price']; ?></strong></span></p class="mb-0">
-                </div>
-                </div>
-            </div>
-            </div>
-        <?php } ?>
-            <hr class="mb-4">
-        </div>
-        </div>
-        <!-- Card -->
-
-
-
-<!-- Card -->
-<div class="mb-3">
-  <div class="pt-4">
-
-    <h5 class="mb-4">We accept</h5>
-
-    <img class="mr-2" width="45px"
-      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-      alt="Visa">
-    <img class="mr-2" width="45px"
-      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-      alt="American Express">
-    <img class="mr-2" width="45px"
-      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-      alt="Mastercard">
-    <img class="mr-2" width="45px"
-      src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
-      alt="PayPal acceptance mark">
-  </div>
-</div>
-<!-- Card -->
-
-</div>
-<!--Grid column-->
+                    <!--Grid column-->
                     <div class="col-lg-4">
 
                         <!-- Card -->
@@ -204,15 +189,15 @@ curl_close($ch_new);
                                         <div>
                                             <strong>The total amount of</strong>
                                             <strong>
-                        <p class="mb-0">(including GST) &#8377;</p>
-                      </strong>
+                                                <p class="mb-0">(including GST) &#8377;</p>
+                                            </strong>
                                         </div>
                                         <span>&#8377;<strong>0.00</strong></span>
                                     </li>
                                 </ul>
 
                                 <button type="button" class="btn btn-primary btn-block waves-effect waves-light">go to
-                  checkout</button>
+                                    checkout</button>
 
                             </div>
                         </div>
@@ -223,9 +208,9 @@ curl_close($ch_new);
                             <div class="card-body">
 
                                 <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Add a discount code (optional)
-                  <span><i class="fas fa-chevron-down pt-1"></i></span>
-                </a>
+                                    Add a discount code (optional)
+                                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                </a>
 
                                 <div class="collapse" id="collapseExample">
                                     <div class="mt-3">
