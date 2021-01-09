@@ -37,6 +37,7 @@ Technologies Used :
 
 Backend : 
     Nodejs [express Framework],Php [Frontend Rendering]
+
 Frontend : 
     HTML5,Jquery
 
@@ -55,7 +56,7 @@ Docker Container :
             sudo docker images
             sudo docker run --name shl-task-services -p 2082 -d shl-task-services
 
-Manull Run :
+Manual Run :
 
 Step1: Install the package dependancy
     Go to the root directory - do npm install in the terminal
