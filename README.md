@@ -1,8 +1,7 @@
 # SHL E-COMMERCE TASK 
-
 OBJECTIVE:
-    The task is to create a checkout system/cart that confirms the following discount/promotion rule
-interface.
+The task is to create a checkout system/cart that confirms the following discount promotion rule interface.
+
 Pseudo Code:
 co = Checkout.new(rules)
 co.scan(item)
@@ -17,11 +16,13 @@ A Rs 30
 B Rs 20
 C Rs 50
 D Rs 15
+
 Promotions
-● If 3 of Item A is purchased, the price of all three is Rs 75(i.e multiples of 3 discount)
-● If 2 of Item B is purchased, the price of both is Rs 35(i.e multiples of 2 discount)
-● If the total basket price(after previous discounts) is over Rs 150, the basket receives an
+    If 3 of Item A is purchased, the price of all three is Rs 75(i.e multiples of 3 discount)
+    If 2 of Item B is purchased, the price of both is Rs 35(i.e multiples of 2 discount)
+    If the total basket price(after previous discounts) is over Rs 150, the basket receives an
 additional discount of Rs 20.
+
 Example Test Data
 
 Basket Price
@@ -30,6 +31,7 @@ A, B, C Rs 100
 B, A, B, A, A Rs 110
 C, B, A, A, D, A, B Rs 155
 C, A, D, A , A Rs 140
+
 
 Technologies Used :
 
@@ -81,4 +83,4 @@ Step 4: Run The Application :
         npm start
 
 Step :5 Debugging 
-    Application logs captured and stored in the logsfiles- logs/ directory
+    Application logs captured and stored in the logsfiles- logs/ director
