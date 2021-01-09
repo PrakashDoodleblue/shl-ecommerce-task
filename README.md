@@ -1,8 +1,7 @@
 # SHL E-COMMERCE TASK 
 
 OBJECTIVE:
-
-The task is to create a checkout system/cart that confirms the following discount/promotion rule
+    The task is to create a checkout system/cart that confirms the following discount/promotion rule
 interface.
 Pseudo Code:
 co = Checkout.new(rules)
