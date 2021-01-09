@@ -32,7 +32,7 @@ class ProductItem extends baseController {
             //price calculation
             const totalprice = ProductItem.prototype._priceCalculation(productData);
 
-            return resposne.out(req, res, statusCode.HTTP_OK, { totalAmount: totalprice });
+            return resposne.out(req, res, statusCode.HTTP_OK, { totalAmount: totalprice, totalItems: productData.length });
         } catch (err) {
             console.log(err);
             return resposne.out(req, res, statusCode.HTTP_INTERNAL_SERVER_ERROR, err);

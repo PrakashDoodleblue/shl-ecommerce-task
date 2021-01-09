@@ -49,6 +49,7 @@ function priceCalculation(requestData) {
             if (response.status) {
                 $('.temp-amt').text(response.data.totalAmount);
                 $('.tem-total-amt').text(response.data.totalAmount);
+                $('.cart-count').text(response.data.totalItems);
             }
         }
     });

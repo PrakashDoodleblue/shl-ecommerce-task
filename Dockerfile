@@ -10,6 +10,8 @@ COPY --chown=node:node . .
 
 RUN npm install
 
+RUN npx knex migrate:latest 
+
 EXPOSE 2082
 
 CMD [ "npm", "start"]
