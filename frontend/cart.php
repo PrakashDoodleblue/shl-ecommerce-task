@@ -2,7 +2,7 @@
 require_once('./RestServices.php');
 $restServices = new RestServices();
 $productList = $restServices->getItemList();
-$imageBaseurl = 'http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //TODO will configure
+$imageBaseurl = "http://".$_SERVER['SERVER_NAME'].'/'.array_pop(explode('/', dirname(__DIR__,1))).'/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
