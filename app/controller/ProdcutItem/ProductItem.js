@@ -12,12 +12,29 @@ class ProductItem extends baseController {
      */
     addProductItem = async(req, res) => {
         try {
-            req.body.itemcode = "SHLPR" + Math.floor(new Date().valueOf() * Math.random());
-            const responseData = await productItemModel.query()
-                .insert(req.body);
+            const ItemExists = await productItemModel.query()
+                .where({ prodcutItemListId: req.body.prodcutItemListId, productCategoryId: req.body.productCategoryId })
+                .select('prodcutItemId');
 
-            return resposne.out(req, res, statusCode.HTTP_OK, responseData);
+            if (ItemExists.length) {
+                await productItemModel.query()
+                    .where({ prodcutItemId: ItemExists[0].prodcutItemId, status: 1 })
+                    .update({ quantity: req.body.quantity });
+            } else {
+                req.body.itemcode = "SHLPR" + Math.floor(new Date().valueOf() * Math.random());
+                await productItemModel.query()
+                    .insert(req.body);
+            }
+            const productData = await productItemModel.query()
+                .where('status', 1)
+                .select('prodcutItemId', 'prodcutItemListId', 'quantity', 'Itemprice');
+
+            //price calculation
+            const totalprice = ProductItem.prototype._priceCalculation(productData);
+
+            return resposne.out(req, res, statusCode.HTTP_OK, { totalAmount: totalprice });
         } catch (err) {
+            console.log(err);
             return resposne.out(req, res, statusCode.HTTP_INTERNAL_SERVER_ERROR, err);
         }
     }
@@ -78,6 +95,39 @@ class ProductItem extends baseController {
         } catch (err) {
             return resposne.out(req, res, statusCode.HTTP_INTERNAL_SERVER_ERROR, err);
         }
+    }
+
+    _priceCalculation(productData) {
+
+        var totalprice, ItemAprice, ItemBprice, otherItemPrice = 0.00;
+
+        productData.forEach(itemvalue => {
+
+            if (itemvalue.prodcutItemListId == 1 && itemvalue.quantity >= 3) {
+                ItemAprice = Number(itemvalue.Itemprice - 5) * itemvalue.quantity;
+            } else if (itemvalue.prodcutItemListId == 1 && itemvalue.quantity < 3) {
+                ItemAprice = Number(itemvalue.Itemprice) * itemvalue.quantity;
+            } else {
+                ItemAprice = ItemAprice > 0 ? ItemAprice : 0.00;
+            }
+
+            if (itemvalue.prodcutItemListId == 2 && itemvalue.quantity >= 2) {
+                ItemBprice = Number(itemvalue.Itemprice - 2.5) * itemvalue.quantity;
+            } else if (itemvalue.prodcutItemListId == 2 && itemvalue.quantity < 2) {
+                ItemBprice = Number(itemvalue.Itemprice) * itemvalue.quantity;
+            } else {
+                ItemBprice = ItemBprice > 0 ? ItemBprice : 0.00;
+            }
+
+            if (itemvalue.prodcutItemListId != 1 && itemvalue.prodcutItemListId != 2) {
+                otherItemPrice = Number(itemvalue.Itemprice) * itemvalue.quantity;
+            }
+
+        });
+        totalprice = ItemAprice + ItemBprice + otherItemPrice;
+        totalprice = totalprice >= 150 ? totalprice - 20 : totalprice;
+
+        return totalprice;
     }
 }
 

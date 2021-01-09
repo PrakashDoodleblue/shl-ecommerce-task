@@ -129,9 +129,9 @@ $imageBaseurl = 'http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //
                                                     </div>
                                                     <div>
                                                         <div class="def-number-input number-input safari_only mb-0 w-100">
-                                                            <button class="minus qty-minus-btn" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productcategory']['categoryId'] ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
-                                                            <input class="quantity" min="0" name="quantity" value="1" type="number">
-                                                            <button class="plus qty-add-btn" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productcategory']['categoryId'] ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
+                                                            <button class="minus qty-minus-btn" data-priceid="<?php echo $value['priceId'];?>" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productCategoryId']; ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
+                                                            <input class="quantity" min="0" name="quantity" value="0" type="number">
+                                                            <button class="plus qty-add-btn" data-priceid="<?php echo $value['priceId'];?>" data-price="<?php echo $value['price']; ?>" data-categoryid="<?php echo $value['productCategoryId']; ?>" data-itemid="<?php echo $value['ItemList']['itemId'] ?>" data-priceid="<?php echo $value['priceId'] ?>"></button>
                                                         </div>
                                                         <small id="passwordHelpBlock" class="form-text text-muted text-center">
                                                             (Note, 1 piece)
@@ -179,7 +179,7 @@ $imageBaseurl = 'http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                         Temporary amount &#8377;
-                                        <span>0.00</span>
+                                        <span class="temp-amt">0.00</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                         Shipping &#8377;
@@ -192,7 +192,7 @@ $imageBaseurl = 'http://localhost/nodeprojects/SHL-Task/shl-ecommerce-task/'; //
                                                 <p class="mb-0">(including GST) &#8377;</p>
                                             </strong>
                                         </div>
-                                        <span>&#8377;<strong>0.00</strong></span>
+                                        <span>&#8377;<strong class="tem-total-amt">0.00</strong></span>
                                     </li>
                                 </ul>
 

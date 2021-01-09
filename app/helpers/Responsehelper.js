@@ -59,7 +59,6 @@ class Responsehelper {
                 const result = {
                     status: true,
                     message: "success.!",
-                    // ...resultData
                     data: resultData || {}
                 }
                 logger.info({ requestPayload: { BODY: req.body || "", PARAMS: req.params || "", QUERYSTRING: req.query || "" } });
