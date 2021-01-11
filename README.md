@@ -83,4 +83,4 @@ Step 4: Run The Application :
         npm start
 
 Step :5 Debugging 
-    Application logs captured and stored in the logsfiles- logs/ director
+    Application logs captured and stored in the logsfiles- logs/ directory
