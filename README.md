@@ -48,12 +48,12 @@ How to Run the Project :
 
 Docker Container :
     Run through Docker container :
-        Step 1: Build Docker
-            sudo docker build -t shl-task-services .
+    Step 1: Build Docker
+        sudo docker build -t shl-task-services .
 
-        Step 2 :List Docker Image
-            sudo docker images
-            sudo docker run --name shl-task-services -p 2082 -d shl-task-services
+    Step 2 :List Docker Image
+        sudo docker images
+        sudo docker run --name shl-task-services -p 2082 -d shl-task-services
 
 Manull Run :
 
